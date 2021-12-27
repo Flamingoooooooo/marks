@@ -1,6 +1,6 @@
 //防抖函数 延迟防抖
+let timer;//放在防抖里面实现不了效果，func会被调用多次
 function debounce(func,delay){
-  let timer;
   return function(){
     let context=this;//保存func的词法环境，如果不保存，直接执行func，return的函数会指向window，而func应该是指向func调用者的
     let args=arguments;
@@ -12,8 +12,8 @@ function debounce(func,delay){
 }
 
 //节流函数 方法一：前缘节流
+let timer;
 function throttle(func,delay){
-  let timer;
   return function(){
     let context=this;
     let args=arguments;
@@ -28,8 +28,8 @@ function throttle(func,delay){
 }
 
 //方法二：Date：
+let pre=0;
 function throttle2(func,delay){
-  let pre=0;
   return function(){
     let now=new Date;
     let context=this;
