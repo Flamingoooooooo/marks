@@ -18,4 +18,3 @@ defer->继续解析，html->html解析完毕，执行脚本
 js的执行依赖于css，css样式全部下载完成才执行js，所以没有要求
 ## DOMContentLoaded和window.onload的区别
 前者在html被完全加载时触发，后者在页面全部加载完成时触发，包括依赖的样式，图片，异步js等
-
