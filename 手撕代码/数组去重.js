@@ -3,6 +3,7 @@
 //3.排序后去重，对象和Nan不去重，
 //4.利用对象属性去重，全部去重
 //5.ES6set和解构赋值/Array.from，对象不去重，Nan去重
+//6.reduce去重
 [...new Set(arr)]
 Array.from(new Set(arr))
 //手写一个map/set
