@@ -1,0 +1,66 @@
+.triangle {
+  /* 利用border画三角形，设置其他三边颜色为transparent
+  通过设置底的宽度比其他边宽来调整三角形高度 */
+  width: 0;
+  height: 0;
+  /* 通过设置邻边的宽度来调整三角形的宽度 */
+  /* 梯形类似思路，设置content为正方形，border会变成梯形 */
+  border:100px solid transparent;
+  border-left: 400px solid red;
+}
+.sector {
+  /* 扇形通过设置一个圆角实现 */
+  /* border-radius:100px 0 0 0; */
+  /* width: 100px;
+  height: 100px; */
+  background: blue;
+  /* 方法二：画一个圆然后设置其他三边为transparent */
+  /* 类似三角形的思路，设置四条边都为圆弧然后隐藏其他三条 */
+  border: 100px solid transparent;
+  width: 0;
+  border-radius: 100px;
+  border-top-color: red;
+}
+.arrow {
+  /* 箭头：画两个三角形，用和背景颜色相同的去覆盖另一个，只留下小部分形成箭头 */
+  width: 0;
+  height: 0;
+  border: 100px solid;
+  border-color: red transparent transparent transparent;
+  position: relative;
+}
+.arrow:after {
+  content:'';
+  position: absolute;
+  left: -100px;
+  top:-105px;
+  border: 100px solid;
+  border-color: white transparent transparent transparent;
+}
+.oval {
+  /* 椭圆依赖border-radius属性，设置垂直半径和水平半径来画椭圆 */
+  width: 100px;
+  height: 50px;
+  border-radius: 50px/25px;
+  background: red;
+}
+/* 同心圆就是画两个圆然后小的水平垂直居中 */
+.circle1 {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  background: black;
+  position: relative;
+}
+.circle2 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50px;
+  margin: auto;
+  left: 0;
+  top:0;
+  bottom: 0;
+  right: 0;
+  background: white;
+}

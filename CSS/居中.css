@@ -1,0 +1,47 @@
+/* 定宽高：*/
+/* .parent {
+  width: 200px;
+  height: 200px;
+  border: 1px solid red;
+  position: relative;
+}
+ .child {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: blue;
+  left: 50%;
+  top:50%;
+  1.绝对定位+负margin 
+  margin-left: -50px;
+  margin-top: -50px;
+  2.绝对定位+transform
+  transform: translate(-50%,-50%);
+  3.绝对定位+left/top/bottom/right+margin
+  left:0;right:0;top:0;bottom:0;
+  margin: auto;
+} */
+
+
+.parent {
+  width: 200px;
+  height: 200px;
+  border: 1px solid red;
+  /* 4.flex */
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  /* 5.grid+margin:auto
+  display: grid; */
+}
+.child {
+  width: 100px;
+  height: 100px;
+  background: blue;
+  /* margin: auto; */
+}
+/* 不定宽高 */
+/* 1.也可以用绝对定位+transform
+2.也可用flex 
+3.或者flex不设置justify-conten和align-items而让子元素margin auto
+4.和定宽高同样的grid */
