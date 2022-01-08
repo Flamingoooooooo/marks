@@ -7,7 +7,7 @@ function myNew(){
   obj._proto_=func.prototype;
   //用对象obj调用func函数
   let result = func.call(obj,...args);
-  //？？？
+  //这里是模拟真正new的实现，若返回构造函数返回别的对象，就照常返回，否则都返回这个被创建的result对象
   if(result && (typeof(result) === "object" || typeof(result)==="Fuction")){
     return result;
   }
