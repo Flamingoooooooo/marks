@@ -1,50 +1,74 @@
-Function.prototype.myBind=function(){
-  //保存this
-  var _this = this;
-
-  var context = [].shift.call(arguments);//保存需要绑定的this上下文，取出第一个参数
-  var args = [].slice.call(arguments);//剩下参数转为数组
-
-  // console.log(_this,context,args)
-  return function() {
-    return _this.apply(context,[].concat.call(args,[].slice.call(arguments)))
-  }
+/**
+ * call
+ * @param {*} context 
+ * @returns 
+ */
+Function.prototype.myCall = function (context) {
+  //简单判断context为false是不行的，因为空字符串，布尔类型，Number0也是false
+  if (context === undefined || context === null) context = window
+  else context = Object(context)
+  //给context加上目标方法，使用symnol防止和原有属性冲突
+  const method = Symbol('targetMethod')
+  context[method] = this
+  //执行，并删除目标方法
+  let res = context.method(...arguments)
+  delete context[method]
+  return res
 }
-
-Function.prototype.myCall=function(context){
-  //第一个参数为调用call方法的函数中this的指向，context是 想要执行.call()之前的函数 的对象
-  var context=context || global;
-  //将this保存到context的fn属性，保存的是.call()之前的、想要使用的函数
-  context.fn=this;
-  var arr=[];
-  //复制参数数组到arr
-  for(var i=0;i<arguments.length;i++){              
-    arr.push("arguments[" + i + "]")
+/**
+ * apply
+ * @param {*} context 
+ * @returns 
+ */
+Function.prototype.myApply = function (context) {
+  //apply和call只有参数处理的不同
+  if (context === undefined || context === null) context = window
+  else context = Object(context)
+  const method = Symbol('targetMethod')
+  context[method] = this
+  //apply的第二个参数应该为数组或类数组
+  let res
+  if (!Array.isArray(arguments[1]) && !isArrayLike(arguments[1])) {
+    throw new TypeError('第二个参数只能为数组或类数组！')
+  } else {
+    res = context[method]([...arguments[1]])
   }
-  //执行this指向的函数，并返回结果
-  var result=eval("context.fn(" + arr.toString() + ")")
-  //销毁this
-  delete context.fn;
-  return result;
+  delete context[method]
+  return res
 }
-
-Function.prototype.myApply=function(context,arr){
-  //保存this到context.fn中
-  let context=context || global;
-  context.fn=this;
-
-  let result;
-  if(!arr){
-    //数组为空直接执行
-    result=context.fn();
-  }else{
-    let args=[];
-    for(let i=0;i<arr.length;i++){
-      args.push("arr[" + i + "]")
-    }
-    result=eval("context.fn([" + args.toString() + "])")
+// JavaScript权威指南判断是否为类数组对象
+function isArrayLike(o) {
+  if (o &&                                    // o不是null、undefined等
+    typeof o === 'object' &&                // o是对象
+    isFinite(o.length) &&                   // o.length是有限数值
+    o.length >= 0 &&                        // o.length为非负值
+    o.length === Math.floor(o.length) &&    // o.length是整数
+    o.length < 4294967296)                  // o.length < 2^32
+    return true
+  else
+    return false
+}
+/**
+ * bind方法，还不熟，需要继续练习
+ * @param {*} objThis 
+ * @param  {...any} params 
+ * @returns 
+ */
+Function.prototype.myBind=function(objThis,...params){
+  //存储源函数
+  const func=this
+  //secondParamas为处理二次传参
+  let bindFunc=function(...secondParamas){
+    //判断是否是bindFunc的实例，也就是说，判断是否是通过new调用的
+    const isNew=this instanceof bindFunc
+    //new调用就绑定到this上，否则绑定到objThis上
+    const context=isNew?this:Object(objThis)
+    //返回执行结果
+    return func.call(context,...params,...secondParamas)
   }
-  //销毁this
-  delete context.fn;
-  return result;
+  if(func.prototype){
+    //赋值原函数的prototype给bindFunc
+    bindFunc.prototype=Object.create(func.prototype)
+  }
+  return bindFunc
 }
