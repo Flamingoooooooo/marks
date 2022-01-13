@@ -3,8 +3,8 @@
  * @param {*} params 
  */
 function ajax(params) {
-  params=params?params:{}
-  params.data=paramas.data||{}
+  params = params ? params : {}
+  params.data = paramas.data || {}
   //1.创建XMLHttpRequest对象
   let xhr
   if (window.XMLHttpRequest) xhr = new XMLHttpRequest
@@ -36,23 +36,23 @@ function ajax(params) {
           response = xhr.responseText
         }
         //执行成功的回调函数
-        params.success(response)
+        params.success && params.success(response)
       } else {
         //失败的回调
-        params.error(this.status)
+        params.error && params.error(this.status)
       }
     }
   }
   //连接和传输数据
-  if(params.type=='GET'){
+  if (params.type == 'GET') {
     //三个参数：方法，路径，是否异步，一般都是异步，其实还有两个:name&password,服务器需要时填
-    xhr.open(paramas.type,params.url,params.async)
+    xhr.open(paramas.type, params.url, params.async)
     xhr.send(null)
-  }else{
+  } else {
     //post方法
-    xhr.open(paramas.type,params.url,params.async)
+    xhr.open(paramas.type, params.url, params.async)
     //设置请求头,application/json接收
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     xhr.send(paramas.data)
   }
 }

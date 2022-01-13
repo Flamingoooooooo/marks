@@ -3,7 +3,8 @@
  * @param {*} context 
  * @returns 
  */
-Function.prototype.myCall = function (context) {
+a.call()
+Function.prototype.myCall = function (context,...argArrays) {
   //简单判断context为false是不行的，因为空字符串，布尔类型，Number0也是false
   if (context === undefined || context === null) context = window
   else context = Object(context)
@@ -11,7 +12,7 @@ Function.prototype.myCall = function (context) {
   const method = Symbol('targetMethod')
   context[method] = this
   //执行，并删除目标方法
-  let res = context.method(...arguments)
+  let res = context.method(...argArrays)
   delete context[method]
   return res
 }
