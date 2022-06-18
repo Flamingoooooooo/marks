@@ -11,6 +11,15 @@ function myNew(){
   if(result && (typeof(result) === "object" || typeof(result)==="Fuction")){
     return result;
   }
-
   return obj;
+}
+
+function create(func,...args){
+  let obj={}
+  obj.__proto__=func.prototype
+  let result=func.call(func,...args)
+  if(result&&(typeof result==='Object'||typeof result==='Function')){
+    return result
+  }
+  return obj
 }

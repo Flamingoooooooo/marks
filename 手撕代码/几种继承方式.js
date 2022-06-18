@@ -1,9 +1,10 @@
 //1.原型链继承
 function Dad(){}
-function Sun(){}
-Sun.prototype=new Dad;//继承
+function Son(){}
+Son.prototype=new Dad;//继承
+Son.prototype.constructor=Son
 //给子类添加方法要在继承之后
-let sun=new Sun;
+let son=new Son;
 
 //2.构造函数继承
 function Father(){}

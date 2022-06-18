@@ -18,13 +18,25 @@ function curry(fn,argsArr){
       return curry(fn,args)
   }
 }
-function sum(a,b,c){
-  return a+b+c;
+
+function sum(...args){
+  if(args.length>=2)return args[1]+args[0]
+  return function(){
+    return args[0]+arguments[0]
+  }
 }
-let fn=curry(sum);
-let a1=fn(1);
-console.log(a1);
-let a2=a1(2);
-console.log(a2);
-let a3=a2(2);
-console.log(a3);
+
+const curry=(fn,...args)=>{
+  args>=fn.length?fn(...args):(...Args)=>curry(fn,...args,...Args)
+}
+function add(){
+  let args=[...arguments]
+  const curry=function(){
+    args=[...args,...arguments]
+    return curry
+  }
+  curry.toString=function(){
+    return args.reduce((a,b)=>a+b)
+  }
+  return curry
+}

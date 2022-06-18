@@ -5,17 +5,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="各种布局.css">
+  <!-- <link rel="stylesheet" href="各种布局.css"> -->
+  <style>
+    .father{
+      /* width: 100%; */
+      height: 500px;
+      display: flex;
+    }
+    .left{
+      /* width: 100px; */
+      height: 500px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 100px;
+      background-color: red;
+    }
+    .right{
+      flex: 1;
+      height: 500px;
+      background-color: green;
+    }
+  </style>
 </head>
 <body>
-  <!-- 双栏
-  <div class="left">左边定宽</div>
-  <dv class="right">右侧自适应</dv> -->
-  <!-- 圣杯和双飞翼 -->
-  <div class="center">
-    <div class="inner">中间自适应,在文档前面使其最先加载</div>
+  <div class="father">
+    <div class="left"></div>
+    <div class="right"></div>
   </div>
-  <div class="left">左边</div>
-  <div class="right">右边</div>
+  
 </body>
 </html>

@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+div {
+  width: 0;
+  margin: 1px;
+  height: 100px;
+  background-color: aqua;
+}
+#t1 {
+  flex:1;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 1;
+}
+#t2 {
+  flex-grow: 2;
+}
+#t3 {
+  flex-grow: 3;
+}
+#t4 {
+  flex-grow: 4;
+  
+}
+/* 1.内容随窗口大小变化而变化
+2.不同大小有不同布局
+百分比，媒体查询，rem+媒体查询，flex， */

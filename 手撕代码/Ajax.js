@@ -56,3 +56,32 @@ function ajax(params) {
     xhr.send(paramas.data)
   }
 }
+function ajax(params){
+  params = params ? params : {}
+  params.data = paramas.data || {}
+  let xhr
+  if (window.XMLHttpRequest) xhr = new XMLHttpRequest
+  //兼容IE6
+  else xhr = new ActiveXObject('Microsoft.XMLHTTP')
+  xhr.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      if (this.status >= 200 && this.status < 300 || this.status === 304) {
+        //判断接受的数据类型
+        let response
+        let type = xhr.getResponseHeader('Content-Type')
+        if (type.indexOf('xml') === -1 && xhr.responseXML) {
+          //Documet对象响应
+          response = xhr.responseXML
+        } else if (type = 'application/json') {
+          //JSON格式
+          response = JSON.parse(xhr.responseText)
+        } else {
+          response = xhr.responseText
+        }
+        params.success && params.success(response)
+      } else {
+        params.error && params.error(this.status)
+      }
+    }
+  }
+}

@@ -3,7 +3,6 @@
  * @param {*} context 
  * @returns 
  */
-a.call()
 Function.prototype.myCall = function (context,...argArrays) {
   //简单判断context为false是不行的，因为空字符串，布尔类型，Number0也是false
   if (context === undefined || context === null) context = window
@@ -16,6 +15,7 @@ Function.prototype.myCall = function (context,...argArrays) {
   delete context[method]
   return res
 }
+
 /**
  * apply
  * @param {*} context 

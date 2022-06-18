@@ -10,3 +10,11 @@ Object.myCreate=function(prototype,properties){
               //但因为没有使用prototype的构造器，
               //没有继承到prototype构造器里的属性和方法
 }
+Object.create=function(prototype,properties){
+  let F=function(){}
+  F.prototype=prototype
+  if(properties){
+    Object.defineProperties(F,properties)
+  }
+  return new  F()
+}

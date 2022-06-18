@@ -6,7 +6,7 @@ function quickSort(arr){
   let index=Math.floor(arr.length/2);//取一个基准并记下它的索引，大的存右边小的存左边
   let flag=arr.splice(index,1)[0];//要把基准从数组中取出来，不然它会参与排序，会乱套
   for(let i=0;i<arr.length;i++){
-    if(arr[i]<p){
+    if(arr[i]<flag){
       left.push(arr[i]);
     }else{
       right.push(arr[i]);
@@ -14,6 +14,21 @@ function quickSort(arr){
   }
   return quickSort(left).concat(flag,quickSort(right))
 }
+
+function sort(arr){
+  if(arr.length===1)return arr
+  let left=[]
+  let right=[]
+  let index=Math.floor(arr.length/2)
+  let flag=arr.splice(index,1)[0]
+  for(let i=0;i<arr.length;i++){
+    if(arr[i]<flag)left.push(arr[i])
+    else right.push(arr[i])
+  }
+  return sort(left).concat(flag,sort(right))
+}
+
+
 //插入排序
 function insertSort(arr){
   let index;
